@@ -19,7 +19,8 @@ is useful if you want to save an expression in a variable.}
 A server function for rendering leafgl
 }
 \description{
-Use leafgl in shiny
+It's a copy of \code{\link[leaflet]{renderLeaflet}}, so either
+  function should work.
 }
 \examples{
 if (interactive()) {
@@ -47,7 +48,7 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-    output$mymap <- renderLeaflet(m)
+    output$mymap <- renderLeafgl(m)
 }
 
 shinyApp(ui, server)

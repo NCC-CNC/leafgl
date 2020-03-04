@@ -37,7 +37,6 @@
 #' shinyApp(ui, server)
 #' }
 #'
-
 leafglOutput <- function(outputId, width = "100%", height = 400){
   tagList(
     leafletOutput(outputId = outputId, width = width, height = height),
@@ -49,6 +48,8 @@ leafglOutput <- function(outputId, width = "100%", height = 400){
 #
 #' Use leafgl in shiny
 #'
+#' @description It's a copy of \code{\link[leaflet]{renderLeaflet}}, so either
+#'   function should work.
 #' @importFrom leaflet renderLeaflet
 #'
 #' @inheritParams leaflet::renderLeaflet
@@ -82,13 +83,11 @@ leafglOutput <- function(outputId, width = "100%", height = 400){
 #' )
 #'
 #' server <- function(input, output, session) {
-#'     output$mymap <- renderLeaflet(m)
+#'     output$mymap <- renderLeafgl(m)
 #' }
 #'
 #' shinyApp(ui, server)
 #' }
 #'
-renderLeafgl <- function(expr, env = parent.frame(), quoted = FALSE){
-  renderLeaflet(expr = expr, env = env, quoted = quoted)
-}
+renderLeafgl <- renderLeaflet
 
