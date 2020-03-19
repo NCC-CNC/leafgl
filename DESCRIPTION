@@ -35,6 +35,6 @@ Imports:
   sf
 Suggests:
     colourvalues, 
-    mapview, 
+    mapview,
     shiny, 
     testthat

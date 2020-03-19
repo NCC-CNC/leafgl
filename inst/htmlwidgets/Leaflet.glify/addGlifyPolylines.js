@@ -20,6 +20,13 @@ LeafletWidget.methods.addGlifyPolylines = function(data, cols, popup, opacity, g
     if (popup) {
         if (popup === true) {
           pop = function (e, feature) {
+            if (HTMLWidgets.shinyMode) {
+              // Convert to Simple Feature and return to Shiny
+              Shiny.setInputValue(map.id + "_glify_click"+":sf_coord_lines", {
+                geom: feature.geometry.coordinates,
+                data: feature.properties
+              });
+            }
             var popUp = '<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}"]/g,'')+'</pre>';
             if (map.hasLayer(lineslayer.glLayer)) {
               L.popup({ maxWidth: 2000 })
@@ -31,6 +38,8 @@ LeafletWidget.methods.addGlifyPolylines = function(data, cols, popup, opacity, g
         } else {
           pop = function (e, feature) {
             if (map.hasLayer(lineslayer.glLayer)) {
+              console.log(e);
+              //debugger;
               L.popup({ maxWidth: 2000 })
                 .setLatLng(e.latlng)
                 .setContent(feature.properties[[popup]].toString())
@@ -42,12 +51,26 @@ LeafletWidget.methods.addGlifyPolylines = function(data, cols, popup, opacity, g
         pop = null;
     }
 
-
+    console.log("data - Lines");console.log(data)
     var lineslayer = L.glify.lines({
       map: map,
       latitudeKey: 1,
       longitudeKey: 0,
       click: pop,
+      hover: function (e, feature) {
+            var popUp = '<pre>'+JSON.stringify(feature.properties,null,' ').replace(/[\{\}"]/g,'')+'</pre>';
+            if (map.hasLayer(lineslayer.glLayer)) {
+              L.popup({ maxWidth: 2000 })
+                .setLatLng(e.latlng)
+                .setContent(popUp)
+                .openOn(map);
+            }
+          },
+      highlight: {
+            color: "orange",
+            weight: 20,
+            opacity: 0.8},
+      sensitivityHover: 0.03,
       data: data,
       color: clrs,
       opacity: opacity,

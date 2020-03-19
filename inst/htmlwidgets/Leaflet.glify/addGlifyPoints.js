@@ -51,6 +51,7 @@ LeafletWidget.methods.addGlifyPoints = function(data, cols, popup, opacity, size
 
     //var dat = JSON.parse(points);
     //if (popup_var) var pop = JSON.parse(popups);
+    console.log("data - Points");console.log(data)
     var pointslayer = L.glify.points({
       map: map,
       click: function (e, point, xy) {
@@ -62,11 +63,23 @@ LeafletWidget.methods.addGlifyPoints = function(data, cols, popup, opacity, size
             .setContent(popup[idx].toString())
             .openOn(map);
         }
-
       },
+      hover: function (e, feature) {
+        L.popup()
+          .setLatLng(e.latlng)
+          .setContent("You hovered over: " + feature)
+          .openOn(map);
+      },
+      sensitivityHover: 0.7,
+      hoverWait: 200,
+      highlight: {color: "orange",
+                  fillColor: "orange",
+                  size: 5000,
+                  fillOpacity: 0.8},
       data: data,
       color: clrs,
       opacity: opacity,
+      sensitivity: 1,
       size: size,
       className: group
     });

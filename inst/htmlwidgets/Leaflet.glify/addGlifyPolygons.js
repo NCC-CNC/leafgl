@@ -35,9 +35,15 @@ LeafletWidget.methods.addGlifyPolygons = function(data, cols, popup, opacity, gr
         pop = null;
     }
 
+    console.log("data - Polygon"); console.log(data)
     var shapeslayer = L.glify.shapes({
       map: map,
       click: pop,
+      hover: pop,
+      highlight: {
+        color:{r:1,g:0,b:0},
+        opacity: 0.3
+      },
       data: data,
       color: clrs,
       opacity: opacity,
