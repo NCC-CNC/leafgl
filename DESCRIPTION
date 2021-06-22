@@ -1,8 +1,8 @@
 Package: leafgl
 Type: Package
 Title: High-Performance 'WebGl' Rendering for Package 'leaflet'
-Version: 0.1.1
-Authors@R: 
+Version: 0.1.1.1
+Authors@R:
     c(person(given = "Tim",
              family = "Appelhans",
              role = c("cre", "aut", "cph"),

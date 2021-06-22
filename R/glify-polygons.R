@@ -75,10 +75,10 @@ addGlPolygons = function(map,
     palette <- args$palette
     args$palette = NULL
   }
-  fillColor <- makeColorMatrix(fillColor, data, palette = palette)
-  if (ncol(fillColor) != 3) stop("only 3 column fillColor matrix supported so far")
-  fillColor = as.data.frame(fillColor, stringsAsFactors = FALSE)
-  colnames(fillColor) = c("r", "g", "b")
+  # fillColor <- makeColorMatrix(fillColor, data, palette = palette)
+  # if (ncol(fillColor) != 3) stop("only 3 column fillColor matrix supported so far")
+  # fillColor = as.data.frame(fillColor, stringsAsFactors = FALSE)
+  # colnames(fillColor) = c("r", "g", "b")
 
   cols = jsonify::to_json(fillColor, digits = 3)
 
